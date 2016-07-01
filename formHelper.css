@@ -1,0 +1,68 @@
+
+/* line 129 : /Users/elvis/code/ocui/public/css/dialog.styl */
+.zTooltips {
+  position: absolute;
+  font-size: 12px;
+  background: #fcf8e3;
+  border: 1px solid #faebcc;
+  color: #8a6d3b;
+  z-index: 1001;
+  padding: 3px 10px;
+}
+
+/* line 137 : /Users/elvis/code/ocui/public/css/dialog.styl */
+.zTooltips:after {
+  content: "";
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #faebcc;
+  border-right: 0;
+  height: 0;
+  width: 0;
+  display: block;
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  margin-top: -5px;
+}
+
+/* line 150 : /Users/elvis/code/ocui/public/css/dialog.styl */
+.zTooltips.warn {
+  border: none;
+  box-shadow: 0 0 15px rgba(100,100,100,0.15);
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 10px 10px 10px 30px;
+  white-space: nowrap;
+  color: #222;
+  border-radius: 2px;
+  font-size: 13px;
+}
+
+/* line 160 : /Users/elvis/code/ocui/public/css/dialog.styl */
+.zTooltips.warn:before {
+  content: "!";
+  display: block;
+  width: 18px;
+  height: 18px;
+  line-height: 20px;
+  font-weight: border;
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  border-radius: 2px;
+  text-align: center;
+  background: #feb525;
+  color: #fff;
+  font-family: '-webkit-pictograph', 'monospace';
+}
+
+/* line 175 : /Users/elvis/code/ocui/public/css/dialog.styl */
+.zTooltips.warn:after {
+  top: -7px;
+  left: 15px;
+  border-bottom: 8px solid #fff;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+}
+

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     
+    <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="./formHelper.js"></script>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./formHelper.css">
+
+    <style type="text/css">
+        label {width: 100px; display: inline-block;}
+        .form-control{width: 400px; margin-bottom: 10px;}
+        input[type="checkbox"],input[type="radio"]{margin-right:5px;}
+        button .zLoadingIcon{font-size: 18px;}
+        .zTooltips {position: absolute;}
+    </style>
+</head>
+
+<body>
+    <div style="width: 1000px; margin: 20px auto">
+        <div class="alert alert-info">Form相关辅助函数：</div>
+        <div style="padding-left:20px;">
+            <dl>
+                <dt>formHelper.getJson(form);</dt>
+                <dd>从指定表单中，获取出JSON对象的值</dd>
+                <dt>formHelper.fill(form, json);</dt>
+                <dd>根据给出的JSON对象，将值填充到form中</dd>
+                <dt>formHelper.validity(form);</dt>
+                <dd>跟submit表单验证差不多的效果，增强型实现</dd>
+                <dt>formHelper.laodingButton(btnOrForm);</dt>
+                <dd>设置按钮为加载中样式，并disable掉，防止重复提交</dd>
+                <dt>formHelper.resetButton(btnOrForm);</dt>
+                <dd>与loadingButton对应，重置按钮，使他可用</dd>
+                
+            </dl>
+            <form id="form"  class="form-inline">
+                <h2>示例：</h2>
+                 <label>时间：</label>
+                <input class="form-control" type="text" name="creator.name" pattern="\d{4}-\d{2}-\d{2}" />
+                <span class="text-muted">时间格式：dddd-dd-dd, 非必填</span>
+                <br/>
+                
+                <label>时间：</label>
+                <input class="form-control" type="text" name="creator.date" pattern="\d{4}-\d{2}-\d{2}" />
+                <span class="text-muted">时间格式：dddd-dd-dd, 非必填</span>
+                <br/>
+                
+                <label>数值（10-20)：</label>
+                <input class="form-control" type="number" name="number" min="10" max="20" />
+                <span class="text-muted">数值，最大为20，最小为10, 非必填</span>
+                <br/>
+                
+                <label>URL:</label>
+                <input class="form-control" type="url" name="url" />
+                <span class="text-muted">url格式：http..://....., 非必填</span>
+                <br/>
+                
+                <label>Descrption:</label>
+                <textarea class="form-control" name="des" placeholder="descrption" required></textarea>
+                <span class="text-muted">必填项目</span>
+                <br/>
+
+                <label>多选:</label>
+                <label><input type="checkbox" name="hobby.am" value="reading" />reading</label>
+                <label><input type="checkbox" name="hobby.am" value="charting" />charting</label>
+                <label><input type="checkbox" name="hobby.am" value="football" />football</label>
+                <label><input type="checkbox" name="hobby.am" value="basketball" />basketball</label>
+                <br/>
+
+                <label>单选:</label>
+                    <label><input type="radio" name="sex" value="male" /> 男</label>
+                    <label><input type="radio" name="sex" value="female" /> 女</label>
+                <br/>
+                <br/>
+
+                <button class="btn btn-default" type="button" id="btn">验证表单</button>
+
+                <button class="btn btn-default" type="button" id="btnGet">获取值</button>
+                <button class="btn btn-default" type="button" id="btnSet">设置值</button>
+
+                <button class="btn btn-info" type="button" style="width: 100px; margin-left: 30px;" id="btnToggle">Toggle</button>
+                <button class="btn btn-default" type="button" id="btnReset">恢复</button>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        
+        //设置model到表单上----
+        document.getElementById('btnSet').onclick = function() {
+            var model = {
+                creator:{
+                    name: 'elvis',
+                    date: '2015-02-01'
+                },
+                age: 28,
+                des: 'i am a coder',
+                hobby: {
+                    am: ['reading', 'basketball']
+                },
+                sex: 'male'
+            };
+            formHelper.fill('#form', model);
+        };
+
+        //从表单获取JSON数据模型
+        document.getElementById('btnGet').onclick = function() {
+            var model = formHelper.getJson('#form');
+            console.log('model', model);
+        };
+
+        //验证表单-----
+        document.getElementById('btn').onclick = function() {
+            var ret = formHelper.validity('#form');
+            console.log('验证结果', ret);
+        };
+
+        //disable掉按钮，防止重复提交---
+        document.getElementById('btnToggle').onclick = function() {
+            formHelper.loadingButton(this);
+
+        };
+
+        //解禁按钮-----
+        document.getElementById('btnReset').onclick = function() {
+            formHelper.resetButton('#btnToggle');
+        };
+    </script>
+</body>
+
+</html>
